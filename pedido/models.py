@@ -2,6 +2,15 @@ from django.db import models
 from datetime import datetime
 from produto.models import Produto
 
+class CupomDesconto(models.Model):
+    codigo = models.CharField(max_length=8, unique=True)
+    desconto = models.FloatField()
+    usos = models.IntegerField(default=0)
+    ativo = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.codigo
+
 class Pedido(models.Model):
     usuario = models.CharField(max_length=200)
     total = models.FloatField()
@@ -15,6 +24,7 @@ class Pedido(models.Model):
     bairro = models.CharField(max_length=200, blank=True)
     telefone = models.CharField(max_length=30)
     entregue = models.BooleanField(default=False)
+    cupom  = models.ForeignKey(CupomDesconto, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.usuario
