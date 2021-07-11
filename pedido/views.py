@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import Pedido, ItemPedido, CupomDesconto
 from produto.models import Produto, Categoria
+import json
 
 def finalizar_pedido(request, room_name='pedir'):
     if request.method == "GET":
